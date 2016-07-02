@@ -1,0 +1,16 @@
+{
+  "name": "platzigram",
+  "version": "0.1.0",
+  "description": "Red social basada en Platzi por Luis Iván",
+  "main": "app.js",
+  "keywords": [
+    "Instagram",
+    "Platzi",
+    "JS"
+  ],
+  "author": "Luis Iván García Luna",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
