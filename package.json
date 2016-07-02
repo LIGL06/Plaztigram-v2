@@ -11,6 +11,13 @@
   "author": "Luis Iván García Luna",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "materialize-css": "^0.97.6",
+    "pug": "^2.0.0-beta3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2"
   }
 }
