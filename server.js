@@ -3,13 +3,13 @@ var app = express()
 app.set('view engine','pug')
 app.use(express.static('public'))
 app.get('/', function(req,res,next){
-  res.render('index')
+  res.render('index',{title: 'Platzigram'})
 })
 app.get('/signup', function(req,res,next){
-  res.render('index')
+  res.render('index',{title: 'Platzigram - Signup'})
 })
 app.get('/signin', function(req,res,next){
-  res.render('index')
+  res.render('index', {title: 'Platzigram - Signin'})
 })
 app.listen(80, function(error){
   if (error) return console.log(error), process.exit(1)

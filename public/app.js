@@ -2382,13 +2382,26 @@ module.exports = [
 
 },{}],17:[function(require,module,exports){
 var page = require('page');
-
+var empty = require('empty-element');
+var template = require('./template');
 page('/', function (ctx, next) {
   var main = document.getElementById('main-container');
-  main.innerHTML = '<a href="/signup">Signup</a>';
+  empty(main).appendChild(template);
 });
 
-},{"page":11}],18:[function(require,module,exports){
+},{"./template":18,"empty-element":3,"page":11}],18:[function(require,module,exports){
+var yo = require('yo-yo');
+var layout = require('../layout');
+var template = yo`<div class="container timeline">
+  <div class="row">
+    <div class="col s12 m10 offset-m1 l6 offset-l3">
+      content
+    </div>
+  </div>
+</div>`;
+module.exports = layout(template);
+
+},{"../layout":21,"yo-yo":15}],19:[function(require,module,exports){
 var page = require('page');
 
 require('./homepage');
@@ -2397,11 +2410,11 @@ require('./signin');
 
 page();
 
-},{"./homepage":17,"./signin":20,"./signup":22,"page":11}],19:[function(require,module,exports){
+},{"./homepage":17,"./signin":22,"./signup":24,"page":11}],20:[function(require,module,exports){
 var yo = require('yo-yo');
 
 module.exports = function landing(box) {
-  return yo`<div class="container">
+  return yo`<div class="container landing">
     <div class="row">
       <div class="col s10 push-s1">
         <div class="row">
@@ -2415,19 +2428,47 @@ module.exports = function landing(box) {
   </div>`;
 };
 
-},{"yo-yo":15}],20:[function(require,module,exports){
+},{"yo-yo":15}],21:[function(require,module,exports){
+var yo = require('yo-yo');
+module.exports = function layout(content) {
+  return yo`<div>
+  <nav class="header">
+  <div class="nav-wrapper">
+    <div class="container">
+    <div class="row">
+      <div class="col s12 m6 offset-m1">
+        <a href="/" class="brand-logo platzigram">Platzigram</a>
+      </div>
+      <div class="col s12 m6 push-s10">
+        <a href="#!" class="btn btn-large btn-flat dropdown-button" data-activates="drop-user">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <ul id="drop-user" class="dropdown-content">
+          <li>
+            <a href="#!">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+  </nav>
+  <div class="content">
+  ${ content }
+  </div>
+</div>`;
+};
+
+},{"yo-yo":15}],22:[function(require,module,exports){
 var page = require('page');
 var empty = require('empty-element');
 var template = require('./template');
-var title = require('title');
-
 page('/signin', function (ctx, next) {
-  title('Platzigram - Signin');
   var main = document.getElementById('main-container');
   empty(main).appendChild(template);
 });
 
-},{"./template":21,"empty-element":3,"page":11,"title":14}],21:[function(require,module,exports){
+},{"./template":23,"empty-element":3,"page":11}],23:[function(require,module,exports){
 var yo = require('yo-yo');
 var landing = require('../landing');
 
@@ -2458,7 +2499,7 @@ var signinForm = yo`<div class="col s12 m7">
 
 module.exports = landing(signinForm);
 
-},{"../landing":19,"yo-yo":15}],22:[function(require,module,exports){
+},{"../landing":20,"yo-yo":15}],24:[function(require,module,exports){
 var page = require('page');
 var empty = require('empty-element');
 var template = require('./template');
@@ -2470,7 +2511,7 @@ page('/signup', function (ctx, next) {
   empty(main).appendChild(template);
 });
 
-},{"./template":23,"empty-element":3,"page":11,"title":14}],23:[function(require,module,exports){
+},{"./template":25,"empty-element":3,"page":11,"title":14}],25:[function(require,module,exports){
 var yo = require('yo-yo');
 var landing = require('../landing');
 
@@ -2482,7 +2523,7 @@ var signupForm = yo`<div class="col s12 m7">
         <h2>Regístrate para ver fotos de tus amigos estudiando en Platzi</h2>
         <div class="section">
           <a class="btn btn-fb hide-on-small-only">Iniciar sesión con Facebook</a>
-          <a class="btn btn-fb hide-on-med-and-up">Iniciar sesión</a>
+          <a class="btn btn-fb hide-on-med-and-up"><i class="fa fa-facebook-official" aria-hidden="true"></i> Iniciar sesión</a>
         </div>
         <div class="divider"></div>
         <div class="section">
@@ -2504,4 +2545,4 @@ var signupForm = yo`<div class="col s12 m7">
 
 module.exports = landing(signupForm);
 
-},{"../landing":19,"yo-yo":15}]},{},[18]);
+},{"../landing":20,"yo-yo":15}]},{},[19]);
