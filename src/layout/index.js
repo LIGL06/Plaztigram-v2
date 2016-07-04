@@ -8,7 +8,7 @@ module.exports = function layout(content){
       <div class="col s12 m6 offset-m1">
         <a href="/" class="brand-logo platzigram">Platzigram</a>
       </div>
-      <div class="col s12 m6 push-s10">
+      <div class="col s12 m6 push-m8">
         <a href="#!" class="btn btn-large btn-flat dropdown-button" data-activates="drop-user">
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
