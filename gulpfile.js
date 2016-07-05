@@ -13,20 +13,25 @@ gulp.task('assets', function(){
   gulp.src('assets/*').pipe(gulp.dest('public'));
 })
 function compile(watch){
-  var bundle = watchify(browserify('./src/index.js'));
-  function rebundle(){
-    bundle
-      .transform(babel).bundle()
-      .on('error',function(error){console.log(error); this.emit('end')})
-      .pipe(source('index.js'))
-      .pipe(rename('app.js')).pipe(gulp.dest('public'));
-  }
+  var bundle = browserify('./src/index.js', {debug: true});
+
   if (watch) {
+    bundle = watchify(bundle);
     bundle.on('update', function(){
       console.log('-->Bundling...');
       rebundle();
     })
   }
+
+  function rebundle(){
+    bundle
+      .transform(babel, {presets:['es2015'], plugins: ['syntax-async-functions','transform-regenerator']})
+      .bundle()
+      .on('error',function(error){console.log(error); this.emit('end')})
+      .pipe(source('index.js'))
+      .pipe(rename('app.js')).pipe(gulp.dest('public'));
+  }
+
   rebundle();
 }
 gulp.task('build', function(){
@@ -35,4 +40,4 @@ gulp.task('build', function(){
 gulp.task('watch', function(){
   return compile(true);
 })
-gulp.task('default',['styles','assets','watch'])
+gulp.task('default',['styles','assets','build'])

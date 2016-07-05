@@ -4,8 +4,7 @@ var template = require('./template');
 var request = require('superagent');
 var header = require('../header');
 
-
-page('/',header,loadPicturesFetch,function (ctx, next) {
+page('/',header,asyncload,function (ctx, next) {
   var main = document.getElementById('main-container');
   empty(main).appendChild(template(ctx.pictures));
 })
@@ -18,18 +17,17 @@ function loadPictures(ctx, next){
       next()
     })
   }
-// function loadPicturesAxios(ctx, next)
-// {
-//   axios
-//     .get('/api/pictures')
-//     .then(function(res){
-//       ctx.pictures = res.data;
-//       next()
-//     })
-//     .catch(function(error){
-//       console.log(error);
-//     })
-// }
+function loadPicturesAxios(ctx, next){
+  axios
+    .get('/api/pictures')
+    .then(function(res){
+      ctx.pictures = res.data;
+      next()
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+}
 function loadPicturesFetch(ctx, next){
   fetch('/api/pictures')
     .then(function(res){
@@ -42,4 +40,14 @@ function loadPicturesFetch(ctx, next){
     .catch(function(error){
       console.log(error)
     })
+}
+async function asyncload(ctx,next){
+  try {
+    ctx.pictures = await fetch('/api/pictures').then(res =>res.json())
+    next()
+  } catch (e) {
+    return console.log(e)
+  } finally {
+
+  }
 }
