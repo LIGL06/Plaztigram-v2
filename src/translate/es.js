@@ -5,7 +5,7 @@ module.exports = {
   'spanish': 'Español',
   'signup.subheading': 'Regístrate para ver fotos de tus amigos estudiando en Platzi',
   'signup.facebook': 'Inicia sesión con facebook',
-  'signup.text': 'Iniciar sesión',
+  'signup.text': ' Iniciar sesión',
   'email': 'Correo electrónico',
   'username': 'Nombre de usuario',
   'fullname': 'Nombre completo',
